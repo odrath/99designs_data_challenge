@@ -8,14 +8,11 @@ seeds:
     config:
       enabled: true
       tags: contests
-      schema: seed_data
+      schema: raw
       quote_columns: true
     columns:
       - name: id
         description: The id of the contest (joins to the id field of Purchases)
-        tests:
-          - unique
-          - not_null
 
   - name: projects
     description: a record of purchased projects
@@ -24,14 +21,11 @@ seeds:
     config:
       enabled: true
       tags: purchases
-      schema: seed_data
+      schema: raw
       quote_columns: true
     columns:
       - name: id
         description:  The id of the project (joins to the id field of Purchases)
-        tests:
-          - unique
-          - not_null
 
   - name: purchases
     description: a record of sales (contests and projects) that happen on our platform
@@ -40,11 +34,8 @@ seeds:
     config:
       enabled: true
       tags: purchases
-      schema: seed_data
+      schema: raw
       quote_columns: true
     columns:
       - name: id
         description: The id of the contest or project. Can be used to join to the id field of the Contests or Projects table.
-        tests:
-          - unique
-          - not_null
