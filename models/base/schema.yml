@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: manual_contests
+    description: designs that were purchased from a contest
+    docs:
+      show: true
+    columns:
+      - name: contests_sk
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+
+  - name: manual_purchases
+    description: a record of all sales
+    docs:
+      show: true
+    columns:
+      - name: id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+
+  - name: manual_projects
+    description: designs that were purchased from a project
+    docs:
+      show: true
+    columns:
+      - name: id
+        description: Primary key
+        tests:
+          - unique
+          - not_null

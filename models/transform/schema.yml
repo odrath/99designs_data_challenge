@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: purchases_transformed
+    description: Combined information of every client-designer purchase
+    docs:
+      show: true
+    columns:
+      - name: purchases_sk
+        description: Primary key
+        tests:
+          - unique
+          - not_null

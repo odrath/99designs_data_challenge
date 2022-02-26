@@ -1,0 +1,41 @@
+version: 2
+
+seeds:
+  - name: contests
+    description: a record of designs that were purchased from a contest
+    docs:
+      show: true
+    config:
+      enabled: true
+      tags: contests
+      schema: raw
+      quote_columns: true
+    columns:
+      - name: id
+        description: The id of the contest (joins to the id field of Purchases)
+
+  - name: projects
+    description: a record of purchased projects
+    docs:
+      show: true
+    config:
+      enabled: true
+      tags: purchases
+      schema: raw
+      quote_columns: true
+    columns:
+      - name: id
+        description:  The id of the project (joins to the id field of Purchases)
+
+  - name: purchases
+    description: a record of sales (contests and projects) that happen on our platform
+    docs:
+      show: true
+    config:
+      enabled: true
+      tags: purchases
+      schema: raw
+      quote_columns: true
+    columns:
+      - name: id
+        description: The id of the contest or project. Can be used to join to the id field of the Contests or Projects table.
