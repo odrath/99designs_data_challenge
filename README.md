@@ -13,7 +13,7 @@ All queries built to answer Part 1 and Part 2 questions can be found in the fold
 
 File *contests* has duplicated rows. This issue should be solved at the source (while generating the CSV extract) but, for the purpose of this excercise, `SELECT DISTINCT` has been included in the *manual_contests* model.
 
-Some of the purchase IDs from the *purchases* table cannot be found neither in the *contests* nor in the *projects* table, *i.g.* do not have client_id and designer_id assigned. There have been excluded from the *purchases_transformed* model.
+Some of the purchase IDs from the *purchases* table cannot be found neither in the *contests* nor in the *projects* table, *i.g.* do not have client_id and designer_id assigned. There have been excluded from the *purchases_transformed* model. In detail: original *purchases* extract contains 21804 distinct purchase IDs and the *purchases_transformed* model contains 20523 distinct purchase IDs.
 
 # Part 1: SQL exercises solutions
 
