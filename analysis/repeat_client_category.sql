@@ -44,7 +44,6 @@ repeated_client_purchases AS(
     FROM purchases_with_f_cat
     GROUP BY client_id, first_purchase_category
     HAVING COUNT(purchases_sk) > 1
-    ORDER BY first_purchase_category
 ),
 
 -- Let's count distinctive repeat clients per first purchase category
