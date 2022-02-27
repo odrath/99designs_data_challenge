@@ -10,7 +10,7 @@ with ranked AS (
         ORDER BY CAST(time_purchased AS DATE) ASC
        ) purchase_rank
     
-   FROM "dev_ninety"."purchases_transformed"
+   FROM {ref('purchases_transformed')}}
    WHERE is_refunded = 0 
    ORDER BY client_id
 ),
