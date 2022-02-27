@@ -1,7 +1,7 @@
    
-   with ranked AS (
+with ranked AS (
     SELECT
-       client_id
+        client_id
        ,purchases_sk
        ,CAST(time_purchased AS DATE)
        ,category
@@ -13,7 +13,7 @@
    FROM "dev_ninety"."purchases_transformed"
    WHERE is_refunded = 0 
    ORDER BY client_id
-   ),
+),
 
 next AS (
 
@@ -31,7 +31,7 @@ SELECT
            PARTITION BY client_id
            ORDER BY purchase_rank
        ) next_time_purchased
-FROm ranked
+FROM ranked
 ),
 
 same_category AS (
@@ -43,7 +43,6 @@ SELECT
 
 FROM next
 WHERE purchase_rank = 1 
-  AND category IN ('banner-ad-design', 'postcard-flyer-design','illustrations')
   AND next_category IS NOT NULL
   AND category = next_category
 
@@ -58,20 +57,26 @@ SELECT
        ,next_category
 FROM next
 WHERE purchase_rank = 1 
-  AND category IN ('banner-ad-design', 'postcard-flyer-design','illustrations')
   AND next_category IS NOT NULL
   AND category != next_category
-
 )
 
 
-SELECT 
+/*SELECT 
     category
     ,MAX( days_difference) AS max_to_next_purchase
-    ,MIN( days_difference) AS min_to_next_purchase
     ,ROUND(AVG( days_difference)) AS avg_to_next_purchase
 FROM same_category
-GROUP BY category
+GROUP BY category */
+
+
+SELECT
+     category
+     ,next_category
+     ,COUNT(purchases_sk) AS count_of_snd_purchases
+FROM different_category
+GROUP BY category, next_category
+ORDER BY category, COUNT(purchases_sk) DESC
 
 
 

@@ -1,3 +1,6 @@
+
+-- Let's see which clients bought more than once from the same designer
+
 WITH repeated_client_purchases AS(
    SELECT
        designer_id
@@ -10,7 +13,7 @@ WITH repeated_client_purchases AS(
    ORDER BY designer_id
 )
  
- 
+ -- Let's count the number of repeat clients for each designer and find the top 10 designers
  
 SELECT
    designer_id
