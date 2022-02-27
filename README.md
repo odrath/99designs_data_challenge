@@ -4,37 +4,38 @@ The supplied .csv files have been ingested into the database using `dbt seed` co
 
 *Models* folder contains two subfolders:
 * *base* - this layer includes setting up a surrogate key where none of the original columns can be used as a primary key. Each model has a 'manual_' prefix to indicate that the data is coming from a manual extract.
-* *transform* - this layer contains one model combining all the information regarding purchases, whether orderd as "contest" or as "project".
+* *transform* - this layer contains one model combining all the information regarding purchases, whether ordered as a "contest" or as a "project".
 
 Each of the subfolders includes a *schema.yml* file where unique and not_null tests are set for the primary keys.
 All queries built to answer Part 1 and Part 2 questions can be found in the folder *analysis*.
 
 # Data quality comments
 
-File *contests* has duplicated rows. This issue should be solved at the source (while generating the CSV extract) but for the purpose of this excercise `SELECT DISTINCT` has been included in the *manual_contests* model.
+File *contests* has duplicated rows. This issue should be solved at the source (while generating the CSV extract) but, for the purpose of this excercise, `SELECT DISTINCT` has been included in the *manual_contests* model.
 
-Some of the purchase IDs from the *purchases* table cannot be found neither in the *contests* nor in the *projects* table, i.g. do not have client_id and designer_id assigned. There have been excluded from the *purchases_transformed* model.
+Some of the purchase IDs from the *purchases* table cannot be found neither in the *contests* nor in the *projects* table, *i.g.* do not have client_id and designer_id assigned. There have been excluded from the *purchases_transformed* model.
 
 # Part 1: SQL exercises solutions
 
 ## General assumptions and comments
 
-All the refunded purchases has been excluded from the analysis, assuming that client who had two purchases - one refunded and one not refunded - is not a returning client. Appriopriate comments have been made in the code to indicate the exclusion.
+All the refunded purchases has been excluded from the analysis, assuming that client who had two purchases - one refunded and one not refunded - is not a returning client. Appropriate comments have been made in the code to indicate the exclusion.
 
-The SQL queries I written to included as many intermittent steps as possible to showcase the thinking.
+The SQL queries were written to include as many intermittent steps as possible to showcase the thinking.
 
 
 ## Question 1
 
 > Who are the top 10 designers with the most repeat clients, and how many repeat clients do they have?
 
-The query answering this question has been saved as *repeat_client_designer* in the *analysis* model. 
+
+The query answering this question has been saved as *repeat_client_designer.sql* in the *analysis* model. 
 
 
 ## Question 2
 > What percentage of first purchases in top 3 categories (based on returning clients) have repeat work (in any category) after?
 
-The query answering this question has been saved as *repeat_client_category* in the *analysis* model. 
+The query answering this question has been saved as *repeat_client_category.sql* in the *analysis* model. 
 
 # Part 2: Analysis
 > Let’s say we wanted to create an email campaign to encourage repeat relationships. Based on the included data, what advice would you give for the design of this campaign? (e.g when should we send these emails? What should be in them? Who should we send them to? Is this even a good idea at all?)
@@ -74,7 +75,7 @@ with ranked AS (
 
 ```
 
-Secondly, I looked into what was the 'next purchase' category and then did the second purchase take place.
+Secondly, I looked into what was the 'next purchase' category and when did the second purchase take place.
 
 > Comment: If the second purchase was processed before the first design was delivered, it might be better to effectively treat the third (forth... ect) purchase as the second. For the purpose of this excercise I have ignored this, as well as did not look at the third and the following purchases.
 
@@ -156,7 +157,7 @@ The results were as below:
 | t-shirt-design           | 133                   |  11 |
 | web-design               | 138                   |  24 |
 
-Based on these results one idea would be to send one email within first month and another one withing first 3 to 6 months after the purchase encouraging a purchase of the second design in the same category.
+Based on these results one idea would be to send one email within first 2 - 4 weeks and another one within first 3 to 6 months after the purchase encouraging a purchase of the second design in the same category.
 
 
 For the repeated purchases in a different category I looked at what were the most popular pairs of category.
@@ -173,19 +174,19 @@ ORDER BY category, COUNT(purchases_sk) DESC
 
 Some examples of popular 1st & 2nd purchase pairs are:
 
-banner-ad-design &	postcard-flyer-design
+* banner-ad-design &	postcard-flyer-design
 
-book-cover-design &	illustrations
+* book-cover-design &	illustrations
 
-brochure-design	 & postcard-flyer-design
+* brochure-design	 & postcard-flyer-design
 
-business-card-design &	postcard-flyer-design
+* business-card-design &	postcard-flyer-design
 
-postcard-flyer-design &	brochure-design
+* postcard-flyer-design &	brochure-design
 
-product-label-design &	product-packaging-design
+* product-label-design &	product-packaging-design
 
-product-packaging-design & product-label-design
+* product-packaging-design & product-label-design
 
 
 Based on these results it might be a good idea to, for example, email a client who purchased a business-card-design to encourage them to also order a postcard-flyer-design, if they haven't already done so. 

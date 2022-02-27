@@ -5,7 +5,7 @@ WITH first_purchase_time AS (
    SELECT
        client_id
        ,MAX(time_purchased) AS first_purchase_time
-   FROM "dev_ninety"."purchases_transformed"
+   FROM {ref('purchases_transformed')}}
    WHERE is_refunded = 0  -- only looking at not refunded purchases
    GROUP BY client_id
 ),
@@ -17,7 +17,7 @@ first_category AS (
        fp.*
        ,pt.category AS first_purchase_category
    FROM first_purchase_time fp
-   LEFT JOIN "dev_ninety"."purchases_transformed" pt
+   LEFT JOIN {ref('purchases_transformed')}} pt
    ON fp.client_id = pt.client_id
    AND fp.first_purchase_time = pt.time_purchased
 ),
@@ -28,7 +28,7 @@ purchases_with_f_cat AS (
    SELECT
        pt.*
        ,fc.first_purchase_category
-   FROM "dev_ninety"."purchases_transformed" pt
+   FROM {ref('purchases_transformed')}} pt
    LEFT JOIN first_category fc
    ON pt.client_id = fc.client_id
    WHERE is_refunded = 0  -- only looking at not refunded purchases
@@ -44,7 +44,6 @@ repeated_client_purchases AS(
     FROM purchases_with_f_cat
     GROUP BY client_id, first_purchase_category
     HAVING COUNT(purchases_sk) > 1
-    ORDER BY first_purchase_category
 ),
 
 -- Let's count distinctive repeat clients per first purchase category
