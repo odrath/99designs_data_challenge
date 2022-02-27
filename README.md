@@ -15,14 +15,15 @@ File *contests* has duplicated rows. This issue should be solved at the source (
 
 Some of the purchase IDs from the *purchases* table cannot be found neither in the *contests* nor in the *projects* table, *i.g.* do not have client_id and designer_id assigned. There have been excluded from the *purchases_transformed* model. In detail: original *purchases* extract contains 21804 distinct purchase IDs and the *purchases_transformed* model contains 20523 distinct purchase IDs.
 
-# Part 1: SQL exercises solutions
-
-## General assumptions and comments
+# General assumptions and comments
 
 All the refunded purchases has been excluded from the analysis, assuming that client who had two purchases - one refunded and one not refunded - is not a returning client. Appropriate comments have been made in the code to indicate the exclusion.
 
 The SQL queries were written to include as many intermittent steps as possible to showcase the thinking.
 
+The analysis include in this Readme.md file and all the code in the repository are intended as an internal data team resource and a base for further discussion. Especially, the Part 2 contains a collection of hypotheses and exploratory analysis and should be treated neither as a final solution nor a recommendation to the marketing team. 
+
+# Part 1: SQL exercises solutions
 
 ## Question 1
 
