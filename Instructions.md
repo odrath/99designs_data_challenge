@@ -1,12 +1,12 @@
 # Introduction
-Hello! Welcome to the interview exercise for the 99designs lead data analyst position :) 
+Hello! Welcome to the exercise.
 This exercise should take you around 2-3 hours to complete (though that’s a suggestion not a time limit, so there’s no need to time yourself). Our main goal here is to get an idea of how you think and test your SQL, analysis, and communication skills. 
 
 Feel free to use any tools you’d like to answer the questions below – you’ll be judged based on your answers, and not on the tech stack used to get there.
 
 
 # Background
-For this exercise, we’ll be learning more about client-designer relationships on our platform. 99designs connects designers to clients looking for designs, primarily through contests and projects. A “contest” is a product where the client pays upfront and shares a design brief, many different designers submit designs based on that brief, and then the client chooses one or more winning designs to keep. In a “project”, the client and designer agree on a design brief and invoice amount, then work together one-on-one. 
+For this exercise, we’ll be learning more about client-designer relationships on our platform. XYZ connects designers to clients looking for designs, primarily through contests and projects. A “contest” is a product where the client pays upfront and shares a design brief, many different designers submit designs based on that brief, and then the client chooses one or more winning designs to keep. In a “project”, the client and designer agree on a design brief and invoice amount, then work together one-on-one. 
 
 The goal of these questions is to understand more about repeat relationships (i.e. cases where the same client-designer pair work together multiple times).
 
